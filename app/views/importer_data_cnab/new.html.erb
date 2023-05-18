@@ -1,0 +1,7 @@
+<h1>Anexo de CNAB</h1>
+ 
+<%= form_with model: ImporterDataCnab, url: importer_data_cnab_create_path,
+              method: :post, local: true do |f| %>
+  <%= f.file_field :document %><br /><br />
+  <%= f.submit 'Anexo' %>
+<% end %>
