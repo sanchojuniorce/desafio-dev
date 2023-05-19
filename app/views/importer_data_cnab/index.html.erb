@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Nome</th>
+      <th>Estabelecimento</th>
       <th>Cod</th>
       <th>Cod 2</th>
     </tr>
@@ -12,9 +13,10 @@
   <tbody>
     <% @importer_data_cnab.each do |cnab| %>
         <tr>
-          <td><%= cnab.values[2] %></td>
-          <td><%= cnab.values[0] %></td>
-          <td><%= cnab.values[1] %></td>
+          <td><%= cnab.name %></td>
+          <td><%= cnab.establishment %></td>
+          <td><%= cnab.cod1 %></td>
+          <td><%= cnab.cod2 %></td>
           <!--<td><%#= link_to 'Destroy', cnab, method: :delete, data: { confirm: 'Are you sure?' } %></td>!-->
         </tr>
       <%# end %>  
