@@ -28,29 +28,31 @@ class ImporterDataCnabController < ApplicationController
         arr_line = line.split(" ")
         cod = arr_line[0][0..33]
         cod_2 = arr_line[0][38..47]
-        verify_name(arr_line[1])
-        #raise ["MERCADO", "LOJA"].include?(arr_line[1]).inspect
-        if ["MERCADO", "LOJA"].include?(arr_line[1])
-          verify_name(arr_line[1])
-          name = "#{arr_line[0][48..]} #{arr_line[1]}"
-          establishment = arr_line[2..].join(" ")
-        end  
-        # Cnab.create(cod1: cod, cod2: cod_2, name: name, 
-        #   establishment: establishment, importer_data_cnab_id: importer_data_cnab.id
-        # )
+        data_customer = verify_name(arr_line[1])
+        surname = data_customer.present? ? data_customer[0] : arr_line[1]
+        name = "#{arr_line[0][48..]} #{surname}"
+        establishment = "#{data_customer[1]} #{arr_line[2..].join(" ")}"
+        arr_file << {cod1: cod, cod2: cod_2, name: name, 
+          establishment: establishment, importer_data_cnab_id: importer_data_cnab.id}
+        Cnab.create(cod1: cod, cod2: cod_2, name: name, 
+          establishment: establishment, importer_data_cnab_id: importer_data_cnab.id
+        )
       end  
     end
   end  
 
   def verify_name(name_establishment)
+    arr_data_cnab = []
     if name_establishment.present?
-      #debugger
       if ["MERCADO", "LOJA"].any? { |word| name_establishment.include?(word) }
-        name_establishment.chomp("LOJA")
-        name_establishment.chomp("MERCADO")
-        raise name_establishment.inspect
-      end  
+        name_customer = name_establishment.chomp("LOJA")
+        name_customer = name_customer.chomp("MERCADO")
+        establishment = "LOJA".in?(name_establishment) ? "LOJA" : "MERCADO"
+        arr_data_cnab << name_customer
+        arr_data_cnab << establishment
+      end
     end  
+    arr_data_cnab
   end  
 
   private
