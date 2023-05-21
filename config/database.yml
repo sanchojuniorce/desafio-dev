@@ -8,7 +8,7 @@ development:
   database: cnab_bybcoders_development
   username: postgres
   password: postgres
-  host: localhost
+  host: db
   port: 5432
   
 test:
@@ -16,7 +16,7 @@ test:
   database: cnab_bybcoders_test
   username: postgres
   password: postgres
-  host: localhost
+  host: db
   port: 5432
 
 production:
