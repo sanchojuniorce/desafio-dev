@@ -1,4 +1,5 @@
 class Api::V1::OperationsImportedStoresController < ApplicationController
+  before_action :authorize_request
 
   def index
     @stores = Cnab.where(store: params[:store])
