@@ -1,24 +1,17 @@
-# README
+# DESAFIO-DEV
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Montando ambiente local via ASDF
+[Ambiente Local via ASDF](README_ENVIROMENT_LOCAL.md)
+# Usando Docker Compose
+docker compose up
+# Vídeo pacotes, sistema operacional, instalações e infra-estrutura via Readme:
 
-Things you may want to cover:
+# Criando banco/schema/tabelas do zero no postgres:
+# Criando usuário/autenticando/gerando jwt/ utilizando no header jwt nos endpoints:
 
-* Ruby version
+# Utilizando os serviços:
+Observação: os serviços registrados pelo postman foram exportados e salvos dentro do
+projeto com o doc, este é o caminho dentro do projeto: doc/postman/ByCoders.postman_collection.json
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# Acessando a documentação pelo Swagger
+http://localhost:3000/api-docs/index.html

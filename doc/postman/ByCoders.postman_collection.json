@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "2b54660e-b483-435d-ad6b-ff9c689335a7",
+		"name": "ByCoders",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10287332"
+	},
+	"item": [
+		{
+			"name": "Operations_Imported_Stores",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_bycoders\n}}/api/v1/operations_imported_stores/index?store=BAR%20DO%20JO%C3%83O",
+							"host": [
+								"{{url_bycoders\n}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"operations_imported_stores",
+								"index"
+							],
+							"query": [
+								{
+									"key": "store",
+									"value": "BAR%20DO%20JO%C3%83O"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": []
+		}
+	]
+}
