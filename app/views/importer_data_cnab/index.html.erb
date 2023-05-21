@@ -3,27 +3,29 @@
 <table border="1">
   <thead>
     <tr>
-      <th>Nome</th>
-      <th>Estabelecimento</th>
-      <th>Cod</th>
-      <th>Cod 2</th>
+      <th>Dono da loja</th>
+      <th>Nome loja</th>
+      <th>Tipo da transação</th>
+      <th>Data da ocorrência</th>
+      <th>Valor da movimentação</th>
+      <th>CPF do beneficiário</th>
+      <th>Cartão utilizado na transação</th>
+      <th>Hora da ocorrência</th>
     </tr>
   </thead>
 
   <tbody>
     <% @importer_data_cnab.each do |cnab| %>
         <tr>
-          <td><%= cnab.name %></td>
-          <td><%= cnab.establishment %></td>
-          <td><%= cnab.cod1 %></td>
-          <td><%= cnab.cod2 %></td>
-          <!--<td><%#= link_to 'Destroy', cnab, method: :delete, data: { confirm: 'Are you sure?' } %></td>!-->
+          <td><%= cnab.shop_owner %></td>
+          <td><%= cnab.store %></td>
+          <td><%= get_transaction(cnab.transaction_type) %></td>
+          <td><%= cnab.date_occurrence.strftime("%d/%m/%Y") %></td>
+          <td><%= number_to_currency(cnab.movement_value, unit: "") %></td>
+          <td><%= cnab.cpf_beneficiary %></td>
+          <td><%= cnab.card_transaction %></td>
+          <td><%= cnab.hour_transaction.strftime("%H:%M:%S") %></td>
         </tr>
-      <%# end %>  
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%#= link_to 'New Contato', new_contato_path %>

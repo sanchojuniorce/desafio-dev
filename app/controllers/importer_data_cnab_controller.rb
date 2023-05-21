@@ -26,16 +26,23 @@ class ImporterDataCnabController < ApplicationController
       arr_file = []
       File.readlines(path).each do |line|
         arr_line = line.split(" ")
-        cod = arr_line[0][0..33]
-        cod_2 = arr_line[0][38..47]
+
         data_customer = verify_name(arr_line[1])
         surname = data_customer.present? ? data_customer[0] : arr_line[1]
-        name = "#{arr_line[0][48..]} #{surname}"
-        establishment = "#{data_customer[1]} #{arr_line[2..].join(" ")}"
-        arr_file << {cod1: cod, cod2: cod_2, name: name, 
-          establishment: establishment, importer_data_cnab_id: importer_data_cnab.id}
-        Cnab.create(cod1: cod, cod2: cod_2, name: name, 
-          establishment: establishment, importer_data_cnab_id: importer_data_cnab.id
+
+        shop_owner = "#{arr_line[0][48..]} #{surname}"
+        store = "#{data_customer[1]} #{arr_line[2..].join(" ")}"
+        transaction_type = arr_line[0][0].to_i
+        date_occurrence = Date.parse("#{arr_line[0][7..8]}/#{arr_line[0][5..6]}/#{arr_line[0][1..4]}")
+        movement_value = (arr_line[0][8..17].to_f / 100.00)
+        cpf_beneficiary = arr_line[0][18..28]
+        card_transaction = arr_line[0][29..40] 
+        hour_transaction = "#{arr_line[0][42..43]}:#{arr_line[0][44..45]}:#{arr_line[0][46..47]}" #.to_time #.strftime("%H:%M:%S").class
+        
+        Cnab.create(shop_owner: shop_owner, store: store.strip, transaction_type: transaction_type, 
+          date_occurrence: date_occurrence, movement_value: movement_value, 
+          cpf_beneficiary: cpf_beneficiary, card_transaction: card_transaction,
+          hour_transaction: hour_transaction, importer_data_cnab_id: importer_data_cnab.id
         )
       end  
     end
