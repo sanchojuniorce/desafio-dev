@@ -43,10 +43,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_180703) do
   end
 
   create_table "cnabs", force: :cascade do |t|
-    t.string "name"
-    t.string "cod1"
-    t.string "cod2"
-    t.string "establishment"
+    t.string "shop_owner"
+    t.string "store"
+    t.integer "transaction_type"
+    t.date "date_occurrence"
+    t.decimal "movement_value", precision: 10, scale: 2
+    t.string "cpf_beneficiary"
+    t.string "card_transaction"
+    t.time "hour_transaction"
     t.bigint "importer_data_cnab_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
