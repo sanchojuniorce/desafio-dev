@@ -1,0 +1,16 @@
+<%= form_with model: ImporterDataCnab, url: importer_data_cnab_create_path,
+              method: :post, local: true do |f| %>
+  <%= f.file_field :document %><%= f.submit 'Enviar', class: "w3-button w3-teal" %>
+<% end %>
+
+<style>
+  body {
+    min-height: 100vh;
+    max-width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5vmax;
+    box-sizing: border-box;
+  }
+</style>

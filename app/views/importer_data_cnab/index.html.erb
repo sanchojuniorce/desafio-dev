@@ -1,6 +1,6 @@
 <h1>Lista Dados Importados CNAB</h1>
 
-<table border="1">
+<table  class="styled-table">
   <thead>
     <tr>
       <th>Dono da loja</th>
@@ -14,18 +14,16 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @importer_data_cnab.each do |cnab| %>
-        <tr>
-          <td><%= cnab.shop_owner %></td>
-          <td><%= cnab.store %></td>
-          <td><%= get_transaction(cnab.transaction_type) %></td>
-          <td><%= cnab.date_occurrence.strftime("%d/%m/%Y") %></td>
-          <td><%= number_to_currency(cnab.movement_value, unit: "") %></td>
-          <td><%= cnab.cpf_beneficiary %></td>
-          <td><%= cnab.card_transaction %></td>
-          <td><%= cnab.hour_transaction.strftime("%H:%M:%S") %></td>
-        </tr>
-    <% end %>
-  </tbody>
+  <% @importer_data_cnab.each do |cnab| %>
+      <tr>
+        <td><%= cnab.shop_owner %></td>
+        <td><%= cnab.store %></td>
+        <td><%= get_transaction(cnab.transaction_type) %></td>
+        <td><%= cnab.date_occurrence.strftime("%d/%m/%Y") %></td>
+        <td><%= number_to_currency(cnab.movement_value, unit: "") %></td>
+        <td><%= cnab.cpf_beneficiary %></td>
+        <td><%= cnab.card_transaction %></td>
+        <td><%= cnab.hour_transaction.strftime("%H:%M:%S") %></td>
+      </tr>
+  <% end %>
 </table>
