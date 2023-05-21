@@ -88,7 +88,11 @@ paths:
               required:
               - email
               - password                                 
-   
+components:
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer   
 servers:
 - url: http://localhost:3000
   variables:
