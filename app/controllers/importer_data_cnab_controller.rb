@@ -12,8 +12,7 @@ class ImporterDataCnabController < ApplicationController
     @importer_data_cnab = ImporterDataCnab.new(importer_data_cnab_params)
     if @importer_data_cnab.save
       insert_data_cnab(@importer_data_cnab)
-      flash[:success] = I18n.t('messages.creation.success.female', object_label: ImporterDataCnab.model_name.human)
-      redirect_to index_path(id: @importer_data_cnab.id)
+      redirect_to index_path(id: @importer_data_cnab.id, notice: "Importação realizada com sucesso.")
     else
       render :new
     end
