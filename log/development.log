@@ -10102,3 +10102,314 @@ Processing by ImporterDataCnabController#new as HTML
 Completed 200 OK in 169ms (Views: 166.5ms | ActiveRecord: 0.0ms | Allocations: 91578)
 
 
+  [1m[35m (147.4ms)[0m  [1m[35mCREATE DATABASE "cnab_bybcoders_development" ENCODING = 'unicode'[0m
+  [1m[35m (101.6ms)[0m  [1m[35mCREATE DATABASE "cnab_bybcoders_test" ENCODING = 'unicode'[0m
+  [1m[35m (10.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (7.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1795140927652898070)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateImporterDataCnabs (20230517235041)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.0ms)[0m  [1m[35mCREATE TABLE "importer_data_cnabs" ("id" bigserial primary key, "document" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230517235041"]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateActiveStorageTables (20230518001323)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.2ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" bigserial primary key, "key" character varying NOT NULL, "filename" character varying NOT NULL, "content_type" character varying, "metadata" text, "service_name" character varying NOT NULL, "byte_size" bigint NOT NULL, "checksum" character varying, "created_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key")[0m
+  [1m[35m (6.5ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" bigserial primary key, "name" character varying NOT NULL, "record_type" character varying NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" bigserial primary key, "blob_id" bigint NOT NULL, "variation_digest" character varying NOT NULL, CONSTRAINT "fk_rails_993965df05"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230518001323"]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCnabs (20230518180703)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.9ms)[0m  [1m[35mCREATE TABLE "cnabs" ("id" bigserial primary key, "shop_owner" character varying, "store" character varying, "transaction_type" integer, "date_occurrence" date, "movement_value" decimal(10,2), "cpf_beneficiary" character varying, "card_transaction" character varying, "hour_transaction" time, "importer_data_cnab_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_9142702f8e"
+FOREIGN KEY ("importer_data_cnab_id")
+  REFERENCES "importer_data_cnabs" ("id")
+)[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE INDEX "index_cnabs_on_importer_data_cnab_id" ON "cnabs" ("importer_data_cnab_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230518180703"]]
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUsers (20230518180704)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "username" character varying, "email" character varying, "password_digest" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230518180704"]]
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-06-04 15:05:57.332386"], ["updated_at", "2023-06-04 15:05:57.332386"]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(1795140927652898070)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 172.25.0.1 at 2023-06-04 15:06:24 +0000
+Cannot render console from 172.25.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ImporterDataCnabController#new as HTML
+  Rendering importer_data_cnab/new.html.erb
+  Rendered importer_data_cnab/_form.html.erb (Duration: 9.4ms | Allocations: 3567)
+  Rendered importer_data_cnab/new.html.erb (Duration: 31.4ms | Allocations: 14559)
+Completed 500 Internal Server Error in 40ms (ActiveRecord: 0.0ms | Allocations: 18798)
+
+
+  
+ActionView::Template::Error (link_tree argument must be a directory):
+  
+app/assets/config/manifest.js:1
+Started GET "/" for 172.25.0.1 at 2023-06-04 15:07:26 +0000
+Cannot render console from 172.25.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ImporterDataCnabController#new as HTML
+  Rendering importer_data_cnab/new.html.erb
+  Rendered importer_data_cnab/_form.html.erb (Duration: 0.6ms | Allocations: 251)
+  Rendered importer_data_cnab/new.html.erb (Duration: 67.2ms | Allocations: 14794)
+Completed 500 Internal Server Error in 71ms (ActiveRecord: 0.0ms | Allocations: 15173)
+
+
+  
+ActionView::Template::Error (link_tree argument must be a directory):
+  
+app/assets/config/manifest.js:3
+Started GET "/" for 172.25.0.1 at 2023-06-04 15:07:50 +0000
+Cannot render console from 172.25.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ImporterDataCnabController#new as HTML
+  Rendering importer_data_cnab/new.html.erb
+  Rendered importer_data_cnab/_form.html.erb (Duration: 0.5ms | Allocations: 251)
+  Rendered importer_data_cnab/new.html.erb (Duration: 43.2ms | Allocations: 27113)
+Completed 200 OK in 44ms (Views: 43.8ms | ActiveRecord: 0.0ms | Allocations: 27333)
+
+
+Started POST "/importer_data_cnab/create" for 172.25.0.1 at 2023-06-04 15:08:29 +0000
+Cannot render console from 172.25.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ImporterDataCnabController#create as HTML
+  Parameters: {"importer_data_cnab"=>{"document"=>#<ActionDispatch::Http::UploadedFile:0x00007f2a973f3720 @tempfile=#<Tempfile:/tmp/RackMultipart20230604-1-suv853.txt>, @original_filename="CNAB.txt", @content_type="text/plain", @headers="Content-Disposition: form-data; name=\"importer_data_cnab[document]\"; filename=\"CNAB.txt\"\r\nContent-Type: text/plain\r\n">}, "commit"=>"Enviar"}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/importer_data_cnab_controller.rb:13:in `create'
+  [1m[36mImporterDataCnab Create (1.0ms)[0m  [1m[32mINSERT INTO "importer_data_cnabs" ("document", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["document", nil], ["created_at", "2023-06-04 15:08:29.264966"], ["updated_at", "2023-06-04 15:08:29.264966"]]
+  ↳ app/controllers/importer_data_cnab_controller.rb:13:in `create'
+  [1m[36mActiveStorage::Blob Load (0.9ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "ImporterDataCnab"], ["name", "document"], ["LIMIT", 1]]
+  ↳ app/controllers/importer_data_cnab_controller.rb:13:in `create'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "ImporterDataCnab"], ["name", "document"], ["LIMIT", 1]]
+  ↳ app/controllers/importer_data_cnab_controller.rb:13:in `create'
+  [1m[36mActiveStorage::Blob Create (0.8ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["key", "hjvfu4893mtit1e01ym8g1i5g408"], ["filename", "CNAB.txt"], ["content_type", "text/plain"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 1723], ["checksum", "G0ihLegrOXIegCi5HFDbGQ=="], ["created_at", "2023-06-04 15:08:29.315541"]]
+  ↳ app/controllers/importer_data_cnab_controller.rb:13:in `create'
+  [1m[36mActiveStorage::Attachment Create (0.7ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "document"], ["record_type", "ImporterDataCnab"], ["record_id", 1], ["blob_id", 1], ["created_at", "2023-06-04 15:08:29.318468"]]
+  ↳ app/controllers/importer_data_cnab_controller.rb:13:in `create'
+  [1m[36mImporterDataCnab Update (0.5ms)[0m  [1m[33mUPDATE "importer_data_cnabs" SET "updated_at" = $1 WHERE "importer_data_cnabs"."id" = $2[0m  [["updated_at", "2023-06-04 15:08:29.320907"], ["id", 1]]
+  ↳ app/controllers/importer_data_cnab_controller.rb:13:in `create'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/importer_data_cnab_controller.rb:13:in `create'
+[36m  Disk Storage (0.9ms) [0m[32mUploaded file to key: hjvfu4893mtit1e01ym8g1i5g408 (checksum: G0ihLegrOXIegCi5HFDbGQ==)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/importer_data_cnab_controller.rb:13:in `create'
+  [1m[36mActiveStorage::Blob Update (0.4ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = $1 WHERE "active_storage_blobs"."id" = $2[0m  [["metadata", "{\"identified\":true,\"analyzed\":true}"], ["id", 1]]
+  ↳ app/controllers/importer_data_cnab_controller.rb:13:in `create'
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/importer_data_cnab_controller.rb:13:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mImporterDataCnab Load (0.3ms)[0m  [1m[34mSELECT "importer_data_cnabs".* FROM "importer_data_cnabs" WHERE "importer_data_cnabs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mCnab Create (1.0ms)[0m  [1m[32mINSERT INTO "cnabs" ("shop_owner", "store", "transaction_type", "date_occurrence", "movement_value", "cpf_beneficiary", "card_transaction", "hour_transaction", "importer_data_cnab_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["shop_owner", "JOÃO MACEDO"], ["store", "BAR DO JOÃO"], ["transaction_type", 3], ["date_occurrence", "2019-03-01"], ["movement_value", "10000014.2"], ["cpf_beneficiary", "00962067601"], ["card_transaction", "74753****315"], ["hour_transaction", "15:34:53"], ["importer_data_cnab_id", 1], ["created_at", "2023-06-04 15:08:29.361868"], ["updated_at", "2023-06-04 15:08:29.361868"]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mImporterDataCnab Load (0.3ms)[0m  [1m[34mSELECT "importer_data_cnabs".* FROM "importer_data_cnabs" WHERE "importer_data_cnabs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mCnab Create (0.5ms)[0m  [1m[32mINSERT INTO "cnabs" ("shop_owner", "store", "transaction_type", "date_occurrence", "movement_value", "cpf_beneficiary", "card_transaction", "hour_transaction", "importer_data_cnab_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["shop_owner", "MARIA JOSEFINA"], ["store", "LOJA DO Ó - MATRIZ"], ["transaction_type", 5], ["date_occurrence", "2019-03-01"], ["movement_value", "10000013.2"], ["cpf_beneficiary", "05564181506"], ["card_transaction", "33123****768"], ["hour_transaction", "14:56:07"], ["importer_data_cnab_id", 1], ["created_at", "2023-06-04 15:08:29.370692"], ["updated_at", "2023-06-04 15:08:29.370692"]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mImporterDataCnab Load (0.4ms)[0m  [1m[34mSELECT "importer_data_cnabs".* FROM "importer_data_cnabs" WHERE "importer_data_cnabs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mCnab Create (0.4ms)[0m  [1m[32mINSERT INTO "cnabs" ("shop_owner", "store", "transaction_type", "date_occurrence", "movement_value", "cpf_beneficiary", "card_transaction", "hour_transaction", "importer_data_cnab_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["shop_owner", "MARCOS PEREIRA"], ["store", "MERCADO DA AVENIDA"], ["transaction_type", 3], ["date_occurrence", "2019-03-01"], ["movement_value", "10000012.2"], ["cpf_beneficiary", "08451525407"], ["card_transaction", "36777****131"], ["hour_transaction", "17:27:12"], ["importer_data_cnab_id", 1], ["created_at", "2023-06-04 15:08:29.379497"], ["updated_at", "2023-06-04 15:08:29.379497"]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mImporterDataCnab Load (0.3ms)[0m  [1m[34mSELECT "importer_data_cnabs".* FROM "importer_data_cnabs" WHERE "importer_data_cnabs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mCnab Create (0.4ms)[0m  [1m[32mINSERT INTO "cnabs" ("shop_owner", "store", "transaction_type", "date_occurrence", "movement_value", "cpf_beneficiary", "card_transaction", "hour_transaction", "importer_data_cnab_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["shop_owner", "JOÃO MACEDO"], ["store", "BAR DO JOÃO"], ["transaction_type", 2], ["date_occurrence", "2019-03-01"], ["movement_value", "10000011.2"], ["cpf_beneficiary", "00962067601"], ["card_transaction", "73648****009"], ["hour_transaction", "23:42:34"], ["importer_data_cnab_id", 1], ["created_at", "2023-06-04 15:08:29.387834"], ["updated_at", "2023-06-04 15:08:29.387834"]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mImporterDataCnab Load (0.4ms)[0m  [1m[34mSELECT "importer_data_cnabs".* FROM "importer_data_cnabs" WHERE "importer_data_cnabs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mCnab Create (0.6ms)[0m  [1m[32mINSERT INTO "cnabs" ("shop_owner", "store", "transaction_type", "date_occurrence", "movement_value", "cpf_beneficiary", "card_transaction", "hour_transaction", "importer_data_cnab_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["shop_owner", "JOÃO MACEDO"], ["store", "BAR DO JOÃO"], ["transaction_type", 1], ["date_occurrence", "2019-03-01"], ["movement_value", "10000015.2"], ["cpf_beneficiary", "00962067601"], ["card_transaction", "71234****789"], ["hour_transaction", "23:30:00"], ["importer_data_cnab_id", 1], ["created_at", "2023-06-04 15:08:29.396099"], ["updated_at", "2023-06-04 15:08:29.396099"]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mImporterDataCnab Load (0.4ms)[0m  [1m[34mSELECT "importer_data_cnabs".* FROM "importer_data_cnabs" WHERE "importer_data_cnabs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mCnab Create (0.5ms)[0m  [1m[32mINSERT INTO "cnabs" ("shop_owner", "store", "transaction_type", "date_occurrence", "movement_value", "cpf_beneficiary", "card_transaction", "hour_transaction", "importer_data_cnab_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["shop_owner", "MARCOS PEREIRA"], ["store", "MERCADO DA AVENIDA"], ["transaction_type", 2], ["date_occurrence", "2019-03-01"], ["movement_value", "10000010.7"], ["cpf_beneficiary", "08451525407"], ["card_transaction", "38723****998"], ["hour_transaction", "12:33:33"], ["importer_data_cnab_id", 1], ["created_at", "2023-06-04 15:08:29.404409"], ["updated_at", "2023-06-04 15:08:29.404409"]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mImporterDataCnab Load (0.6ms)[0m  [1m[34mSELECT "importer_data_cnabs".* FROM "importer_data_cnabs" WHERE "importer_data_cnabs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mCnab Create (0.7ms)[0m  [1m[32mINSERT INTO "cnabs" ("shop_owner", "store", "transaction_type", "date_occurrence", "movement_value", "cpf_beneficiary", "card_transaction", "hour_transaction", "importer_data_cnab_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["shop_owner", "MARCOS PEREIRA"], ["store", "MERCADO DA AVENIDA"], ["transaction_type", 2], ["date_occurrence", "2019-03-01"], ["movement_value", "10000050.2"], ["cpf_beneficiary", "08451525407"], ["card_transaction", "38473****123"], ["hour_transaction", "23:12:33"], ["importer_data_cnab_id", 1], ["created_at", "2023-06-04 15:08:29.412992"], ["updated_at", "2023-06-04 15:08:29.412992"]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mImporterDataCnab Load (0.3ms)[0m  [1m[34mSELECT "importer_data_cnabs".* FROM "importer_data_cnabs" WHERE "importer_data_cnabs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mCnab Create (0.5ms)[0m  [1m[32mINSERT INTO "cnabs" ("shop_owner", "store", "transaction_type", "date_occurrence", "movement_value", "cpf_beneficiary", "card_transaction", "hour_transaction", "importer_data_cnab_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["shop_owner", "JOSÉ COSTA"], ["store", "MERCEARIA 3 IRMÃOS"], ["transaction_type", 3], ["date_occurrence", "2019-03-01"], ["movement_value", "10000060.2"], ["cpf_beneficiary", "02327029805"], ["card_transaction", "66777****131"], ["hour_transaction", "17:27:12"], ["importer_data_cnab_id", 1], ["created_at", "2023-06-04 15:08:29.421865"], ["updated_at", "2023-06-04 15:08:29.421865"]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mImporterDataCnab Load (0.5ms)[0m  [1m[34mSELECT "importer_data_cnabs".* FROM "importer_data_cnabs" WHERE "importer_data_cnabs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mCnab Create (0.4ms)[0m  [1m[32mINSERT INTO "cnabs" ("shop_owner", "store", "transaction_type", "date_occurrence", "movement_value", "cpf_beneficiary", "card_transaction", "hour_transaction", "importer_data_cnab_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["shop_owner", "MARIA JOSEFINA"], ["store", "LOJA DO Ó - MATRIZ"], ["transaction_type", 1], ["date_occurrence", "2019-03-01"], ["movement_value", "10000020.0"], ["cpf_beneficiary", "05564181506"], ["card_transaction", "31234****332"], ["hour_transaction", "09:00:02"], ["importer_data_cnab_id", 1], ["created_at", "2023-06-04 15:08:29.432290"], ["updated_at", "2023-06-04 15:08:29.432290"]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mImporterDataCnab Load (0.2ms)[0m  [1m[34mSELECT "importer_data_cnabs".* FROM "importer_data_cnabs" WHERE "importer_data_cnabs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mCnab Create (0.5ms)[0m  [1m[32mINSERT INTO "cnabs" ("shop_owner", "store", "transaction_type", "date_occurrence", "movement_value", "cpf_beneficiary", "card_transaction", "hour_transaction", "importer_data_cnab_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["shop_owner", "MARCOS PEREIRA"], ["store", "MERCADO DA AVENIDA"], ["transaction_type", 5], ["date_occurrence", "2019-03-01"], ["movement_value", "10000080.2"], ["cpf_beneficiary", "08451525407"], ["card_transaction", "33123****768"], ["hour_transaction", "14:56:07"], ["importer_data_cnab_id", 1], ["created_at", "2023-06-04 15:08:29.441179"], ["updated_at", "2023-06-04 15:08:29.441179"]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mImporterDataCnab Load (0.2ms)[0m  [1m[34mSELECT "importer_data_cnabs".* FROM "importer_data_cnabs" WHERE "importer_data_cnabs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mCnab Create (0.3ms)[0m  [1m[32mINSERT INTO "cnabs" ("shop_owner", "store", "transaction_type", "date_occurrence", "movement_value", "cpf_beneficiary", "card_transaction", "hour_transaction", "importer_data_cnab_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["shop_owner", "JOSÉ COSTA"], ["store", "MERCEARIA 3 IRMÃOS"], ["transaction_type", 2], ["date_occurrence", "2019-03-01"], ["movement_value", "10000010.2"], ["cpf_beneficiary", "02327029805"], ["card_transaction", "68473****123"], ["hour_transaction", "23:12:33"], ["importer_data_cnab_id", 1], ["created_at", "2023-06-04 15:08:29.449151"], ["updated_at", "2023-06-04 15:08:29.449151"]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mImporterDataCnab Load (0.3ms)[0m  [1m[34mSELECT "importer_data_cnabs".* FROM "importer_data_cnabs" WHERE "importer_data_cnabs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mCnab Create (0.4ms)[0m  [1m[32mINSERT INTO "cnabs" ("shop_owner", "store", "transaction_type", "date_occurrence", "movement_value", "cpf_beneficiary", "card_transaction", "hour_transaction", "importer_data_cnab_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["shop_owner", "JOSÉ COSTA"], ["store", "MERCEARIA 3 IRMÃOS"], ["transaction_type", 3], ["date_occurrence", "2019-03-01"], ["movement_value", "10000610.2"], ["cpf_beneficiary", "02327029805"], ["card_transaction", "66777****131"], ["hour_transaction", "17:27:12"], ["importer_data_cnab_id", 1], ["created_at", "2023-06-04 15:08:29.455382"], ["updated_at", "2023-06-04 15:08:29.455382"]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mImporterDataCnab Load (0.5ms)[0m  [1m[34mSELECT "importer_data_cnabs".* FROM "importer_data_cnabs" WHERE "importer_data_cnabs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mCnab Create (0.5ms)[0m  [1m[32mINSERT INTO "cnabs" ("shop_owner", "store", "transaction_type", "date_occurrence", "movement_value", "cpf_beneficiary", "card_transaction", "hour_transaction", "importer_data_cnab_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["shop_owner", "MARIA JOSEFINA"], ["store", "LOJA DO Ó - FILIAL"], ["transaction_type", 4], ["date_occurrence", "2019-03-01"], ["movement_value", "10000015.23"], ["cpf_beneficiary", "25564181506"], ["card_transaction", "31234****667"], ["hour_transaction", "10:00:00"], ["importer_data_cnab_id", 1], ["created_at", "2023-06-04 15:08:29.463933"], ["updated_at", "2023-06-04 15:08:29.463933"]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mImporterDataCnab Load (0.2ms)[0m  [1m[34mSELECT "importer_data_cnabs".* FROM "importer_data_cnabs" WHERE "importer_data_cnabs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mCnab Create (0.4ms)[0m  [1m[32mINSERT INTO "cnabs" ("shop_owner", "store", "transaction_type", "date_occurrence", "movement_value", "cpf_beneficiary", "card_transaction", "hour_transaction", "importer_data_cnab_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["shop_owner", "MARCOS PEREIRA"], ["store", "MERCADO DA AVENIDA"], ["transaction_type", 8], ["date_occurrence", "2019-03-01"], ["movement_value", "10000010.2"], ["cpf_beneficiary", "38451525407"], ["card_transaction", "32344****122"], ["hour_transaction", "12:32:22"], ["importer_data_cnab_id", 1], ["created_at", "2023-06-04 15:08:29.471544"], ["updated_at", "2023-06-04 15:08:29.471544"]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mImporterDataCnab Load (0.3ms)[0m  [1m[34mSELECT "importer_data_cnabs".* FROM "importer_data_cnabs" WHERE "importer_data_cnabs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mCnab Create (0.5ms)[0m  [1m[32mINSERT INTO "cnabs" ("shop_owner", "store", "transaction_type", "date_occurrence", "movement_value", "cpf_beneficiary", "card_transaction", "hour_transaction", "importer_data_cnab_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["shop_owner", "JOSÉ COSTA"], ["store", "MERCEARIA 3 IRMÃOS"], ["transaction_type", 3], ["date_occurrence", "2019-03-01"], ["movement_value", "10000010.3"], ["cpf_beneficiary", "02327029805"], ["card_transaction", "66777****131"], ["hour_transaction", "17:27:12"], ["importer_data_cnab_id", 1], ["created_at", "2023-06-04 15:08:29.478655"], ["updated_at", "2023-06-04 15:08:29.478655"]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mImporterDataCnab Load (0.3ms)[0m  [1m[34mSELECT "importer_data_cnabs".* FROM "importer_data_cnabs" WHERE "importer_data_cnabs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mCnab Create (0.4ms)[0m  [1m[32mINSERT INTO "cnabs" ("shop_owner", "store", "transaction_type", "date_occurrence", "movement_value", "cpf_beneficiary", "card_transaction", "hour_transaction", "importer_data_cnab_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["shop_owner", "MARIA JOSEFINA"], ["store", "LOJA DO Ó - MATRIZ"], ["transaction_type", 9], ["date_occurrence", "2019-03-01"], ["movement_value", "10000010.2"], ["cpf_beneficiary", "05564181506"], ["card_transaction", "36228****909"], ["hour_transaction", "00:00:00"], ["importer_data_cnab_id", 1], ["created_at", "2023-06-04 15:08:29.486097"], ["updated_at", "2023-06-04 15:08:29.486097"]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mImporterDataCnab Load (0.4ms)[0m  [1m[34mSELECT "importer_data_cnabs".* FROM "importer_data_cnabs" WHERE "importer_data_cnabs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mCnab Create (0.5ms)[0m  [1m[32mINSERT INTO "cnabs" ("shop_owner", "store", "transaction_type", "date_occurrence", "movement_value", "cpf_beneficiary", "card_transaction", "hour_transaction", "importer_data_cnab_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["shop_owner", "MARCOS PEREIRA"], ["store", "MERCADO DA AVENIDA"], ["transaction_type", 4], ["date_occurrence", "2019-06-01"], ["movement_value", "10000050.61"], ["cpf_beneficiary", "78451525407"], ["card_transaction", "31234****223"], ["hour_transaction", "10:00:00"], ["importer_data_cnab_id", 1], ["created_at", "2023-06-04 15:08:29.493639"], ["updated_at", "2023-06-04 15:08:29.493639"]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mImporterDataCnab Load (0.4ms)[0m  [1m[34mSELECT "importer_data_cnabs".* FROM "importer_data_cnabs" WHERE "importer_data_cnabs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mCnab Create (0.4ms)[0m  [1m[32mINSERT INTO "cnabs" ("shop_owner", "store", "transaction_type", "date_occurrence", "movement_value", "cpf_beneficiary", "card_transaction", "hour_transaction", "importer_data_cnab_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["shop_owner", "JOSÉ COSTA"], ["store", "MERCEARIA 3 IRMÃOS"], ["transaction_type", 2], ["date_occurrence", "2019-03-01"], ["movement_value", "10000010.9"], ["cpf_beneficiary", "02327029805"], ["card_transaction", "68723****998"], ["hour_transaction", "12:33:33"], ["importer_data_cnab_id", 1], ["created_at", "2023-06-04 15:08:29.501110"], ["updated_at", "2023-06-04 15:08:29.501110"]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mImporterDataCnab Load (0.2ms)[0m  [1m[34mSELECT "importer_data_cnabs".* FROM "importer_data_cnabs" WHERE "importer_data_cnabs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mCnab Create (0.7ms)[0m  [1m[32mINSERT INTO "cnabs" ("shop_owner", "store", "transaction_type", "date_occurrence", "movement_value", "cpf_beneficiary", "card_transaction", "hour_transaction", "importer_data_cnab_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["shop_owner", "MARCOS PEREIRA"], ["store", "MERCADO DA AVENIDA"], ["transaction_type", 8], ["date_occurrence", "2019-03-01"], ["movement_value", "10000000.2"], ["cpf_beneficiary", "08451525407"], ["card_transaction", "32344****122"], ["hour_transaction", "12:32:22"], ["importer_data_cnab_id", 1], ["created_at", "2023-06-04 15:08:29.510018"], ["updated_at", "2023-06-04 15:08:29.510018"]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mImporterDataCnab Load (0.3ms)[0m  [1m[34mSELECT "importer_data_cnabs".* FROM "importer_data_cnabs" WHERE "importer_data_cnabs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mCnab Create (0.5ms)[0m  [1m[32mINSERT INTO "cnabs" ("shop_owner", "store", "transaction_type", "date_occurrence", "movement_value", "cpf_beneficiary", "card_transaction", "hour_transaction", "importer_data_cnab_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["shop_owner", "JOSÉ COSTA"], ["store", "MERCEARIA 3 IRMÃOS"], ["transaction_type", 2], ["date_occurrence", "2019-03-01"], ["movement_value", "10000000.5"], ["cpf_beneficiary", "02327029805"], ["card_transaction", "67677****877"], ["hour_transaction", "14:18:08"], ["importer_data_cnab_id", 1], ["created_at", "2023-06-04 15:08:29.517860"], ["updated_at", "2023-06-04 15:08:29.517860"]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mImporterDataCnab Load (0.2ms)[0m  [1m[34mSELECT "importer_data_cnabs".* FROM "importer_data_cnabs" WHERE "importer_data_cnabs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mCnab Create (0.7ms)[0m  [1m[32mINSERT INTO "cnabs" ("shop_owner", "store", "transaction_type", "date_occurrence", "movement_value", "cpf_beneficiary", "card_transaction", "hour_transaction", "importer_data_cnab_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["shop_owner", "MARCOS PEREIRA"], ["store", "MERCADO DA AVENIDA"], ["transaction_type", 3], ["date_occurrence", "2019-03-01"], ["movement_value", "10000019.2"], ["cpf_beneficiary", "08451525407"], ["card_transaction", "36777****131"], ["hour_transaction", "17:27:12"], ["importer_data_cnab_id", 1], ["created_at", "2023-06-04 15:08:29.524913"], ["updated_at", "2023-06-04 15:08:29.524913"]]
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/concerns/importer_data_cnab_controller_concern.rb:61:in `block in insert_data_cnab'
+Redirected to http://localhost:3000/index?id=1&notice=Importa%C3%A7%C3%A3o+realizada+com+sucesso.
+Completed 302 Found in 329ms (ActiveRecord: 70.9ms | Allocations: 117480)
+
+
+Started GET "/index?id=1&notice=Importa%C3%A7%C3%A3o+realizada+com+sucesso." for 172.25.0.1 at 2023-06-04 15:08:29 +0000
+Cannot render console from 172.25.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by ImporterDataCnabController#index as HTML
+  Parameters: {"id"=>"1", "notice"=>"Importação realizada com sucesso."}
+  Rendering importer_data_cnab/index.html.erb
+  [1m[36mCnab Load (0.5ms)[0m  [1m[34mSELECT "cnabs".* FROM "cnabs" WHERE "cnabs"."importer_data_cnab_id" = $1[0m  [["importer_data_cnab_id", 1]]
+  ↳ app/views/importer_data_cnab/index.html.erb:23
+  Rendered importer_data_cnab/index.html.erb (Duration: 17.9ms | Allocations: 9145)
+Completed 200 OK in 19ms (Views: 17.8ms | ActiveRecord: 0.5ms | Allocations: 9492)
+
+
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE DATABASE "cnab_bybcoders_development" ENCODING = 'unicode'[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE DATABASE "cnab_bybcoders_test" ENCODING = 'unicode'[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1795140927652898070)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(1795140927652898070)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 172.26.0.1 at 2023-06-04 15:14:01 +0000
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ImporterDataCnabController#new as HTML
+  Rendering importer_data_cnab/new.html.erb
+  Rendered importer_data_cnab/_form.html.erb (Duration: 8.4ms | Allocations: 3517)
+  Rendered importer_data_cnab/new.html.erb (Duration: 153.7ms | Allocations: 32420)
+Completed 200 OK in 161ms (Views: 157.2ms | ActiveRecord: 0.0ms | Allocations: 35325)
+
+

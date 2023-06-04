@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+APP_PATH = File.expand_path('../../config/application',  __FILE__)
+require File.expand_path('../../config/boot',  __FILE__)
+require APP_PATH
+require 'colorize'
+require 'colorized_string'
+require 'rake'
+
+
+# set Rails.env here if desired
+Rails.application.require_environment!
+$stdout.sync = true
+Rake::Task.clear # necessary to avoid tasks being loaded several times in dev mode
+EasyLive::Application.load_tasks # providing your application name is 'sample'
+
+if ARGV[0].present?
+    @port = ARGV[0]
+else
+    @port = 6379
+end
+
+Rake::Task['start_dev:change_port'].invoke(@port)
